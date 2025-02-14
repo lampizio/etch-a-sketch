@@ -3,9 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/style.css">
     <title>Etch-A-Sketch</title>
 </head>
 <body>
-    
+    <script defer src="./scripts/script.js"></script>
+
+    <h1 id="title">Etch-A-Sketch</h1>
+
+    <div id="action-section">
+        <div class="controls">
+            <input type="color" id="color-dialog" value="black">
+            <div class="drawings">
+                <button class="solid-draw">Solid Drawing</button>
+                <button class="rgb-draw">RGB Drawing</button>
+                <button class="darker-draw">Darker Drawing</button>
+            </div>
+
+            <div class="manipulations">
+                <button class="regenerate">Regenerate grid</button>
+                <button class="clear">Clear</button>
+            </div>
+        </div>
+
+        <div class="square-container"></div>
+    </div>
 </body>
 </html>
