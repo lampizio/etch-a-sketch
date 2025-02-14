@@ -14,7 +14,7 @@ function generateDivGrid(n) {
 function getOrderOfMatrix() {
     let n;
     do {
-        n = prompt("Enter the n (order of matrix):");
+        n = prompt("Enter the n (0 < n <= 100):");
     } while (!isMatrixOrderValid(n));
 
     return parseInt(n);
