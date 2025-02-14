@@ -5,7 +5,6 @@ function generateDivGrid(n) {
             item.className = "item";
             item.style.flexBasis = `calc(100% / ${n})`;
             item.style.opacity = 1;
-            item.addEventListener("mouseover", curEvent);
             GRID.appendChild(item);
         }
     }
@@ -42,36 +41,30 @@ function clearDivGrid() {
     }
 }
 
-function removeEvents(event) {
-    for (const child of GRID.children) {
-        child.removeEventListener("mouseover", event);
-    }
-}
-
-function addEvents(event) {
-    for (const child of GRID.children) {
-        child.addEventListener("mouseover", event)
-    }
-}
-
-function updateEvents(event) {
-    removeEvents(curEvent);
+function updateEventCallback(event) {
+    GRID.removeEventListener("mouseover", curEvent);
     curEvent = event;
-    addEvents(curEvent);
+    GRID.addEventListener("mouseover", curEvent);
 }
 
 function solidPaint(event) {
+    if (!event.target.classList.contains("item")) return;
+
     event.target.style.opacity = 1;
     event.target.style.backgroundColor = curColor;
 }
 
 function rgbPaint(event) {
+    if (!event.target.classList.contains("item")) return;
+
     var randomColor = Math.floor(Math.random()*16777215).toString(16);
     event.target.style.opacity = 1;
-    event.currentTarget.style.backgroundColor = "#" + randomColor;
+    event.target.style.backgroundColor = "#" + randomColor;
 }
 
 function darkerPaint(event) {
+    if (!event.target.classList.contains("item")) return;
+    
     if (event.target.style.opacity >= 0.1 * 2) {
         event.target.style.opacity -= 0.1;
     }
@@ -80,32 +73,30 @@ function darkerPaint(event) {
 let colorPallette = document.querySelector("#color-dialog");
 
 const GRID = document.querySelector(".square-container");
-let curEvent = solidPaint;
+let curEvent = null;
 let curColor = colorPallette.value;
 
 colorPallette.addEventListener("change", (event) => {
     curColor = event.target.value;
-    updateEvents(solidPaint);
 })
-
-document.querySelector(".regenerate").addEventListener("click", regenerateDivGrid);
 
 document.querySelector(".solid-draw").addEventListener("click", () => {
     if (curEvent != solidPaint) {
-        updateEvents(solidPaint);
+        updateEventCallback(solidPaint);
     }
 });
 document.querySelector(".rgb-draw").addEventListener("click", () => {
     if (curEvent != rgbPaint) {
-        updateEvents(rgbPaint);
+        updateEventCallback(rgbPaint);
     }
 });
 document.querySelector(".darker-draw").addEventListener("click", () => {
     if (curEvent != darkerPaint) {
-        updateEvents(darkerPaint);
+        updateEventCallback(darkerPaint);
     }
 });
 
+document.querySelector(".regenerate").addEventListener("click", regenerateDivGrid);
 document.querySelector(".clear").addEventListener("click", clearDivGrid);
 
 generateDivGrid(getOrderOfMatrix());
