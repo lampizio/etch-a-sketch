@@ -61,12 +61,13 @@ function updateEvents(event) {
 }
 
 function solidPaint(event) {
-    curEvent = solidPaint;
+    event.target.style.opacity = 1;
     event.target.style.backgroundColor = curColor;
 }
 
 function rgbPaint(event) {
     var randomColor = Math.floor(Math.random()*16777215).toString(16);
+    event.target.style.opacity = 1;
     event.currentTarget.style.backgroundColor = "#" + randomColor;
 }
 
@@ -81,7 +82,6 @@ let colorPallette = document.querySelector("#color-dialog");
 const GRID = document.querySelector(".square-container");
 let curEvent = solidPaint;
 let curColor = colorPallette.value;
-let isDarkerModeOn = false;
 
 colorPallette.addEventListener("change", (event) => {
     curColor = event.target.value;
@@ -101,13 +101,9 @@ document.querySelector(".rgb-draw").addEventListener("click", () => {
     }
 });
 document.querySelector(".darker-draw").addEventListener("click", () => {
-    if (isDarkerModeOn) {
-        removeEvents(darkerPaint);
-    } else {
-        addEvents(darkerPaint);
+    if (curEvent != darkerPaint) {
+        updateEvents(darkerPaint);
     }
-
-    isDarkerModeOn = !isDarkerModeOn;
 });
 
 document.querySelector(".clear").addEventListener("click", clearDivGrid);
