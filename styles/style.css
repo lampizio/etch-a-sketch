@@ -1,0 +1,87 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+    background-color: var(--body-bg-color);
+    color: var(--hover-item-txt-color);
+}
+
+:root {
+    --body-bg-color: #222831;
+    --sub-section-bg-color: #31363F;
+    --item-bg-color: #222831;
+
+    --press-item-bg-color: #3B1C32;
+
+    --hover-item-bg-color: #6A1E55;
+    --hover-item-txt-color: #EEEEEE;
+}
+
+.drawings,
+.manipulations {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+}
+
+button {
+    display: block;
+    height: 35px;
+    width: 150px;
+
+    border: none;
+    border-radius: 10px;
+
+    background-color: var(--sub-section-bg-color);
+}
+
+button:hover {
+    background-color: var(--hover-item-bg-color);
+}
+
+button:active {
+    background-color: var(--press-item-bg-color);
+}
+
+#title {
+    text-align: center;
+    margin: 20px 0 10px;
+}
+
+#action-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+#color-dialog {
+    width: 100px;
+    height: 100px;
+
+    border:solid 3px var(--sub-section-bg-color);
+}
+
+.square-container {
+    display: flex;
+    flex-wrap: wrap;
+
+    border: solid 3px var(--sub-section-bg-color);
+
+    width: 650px;
+    height: 650px;
+}
+
+.item {
+    background-color: #eeeeee;
+    opacity: 100%;
+}
